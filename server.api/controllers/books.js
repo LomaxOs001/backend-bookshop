@@ -31,5 +31,6 @@ const getBooks = async (req, res) => {
     finally {
         db_client.release();
     }
-}
+};
+
 export default  { getBooks };
