@@ -1,7 +1,12 @@
 import pool from '../models/db.js';
 
 
+/**
+ * getBooks - fetches all books from the database and returns them as a JSON array
+ * 
+ */
 const getBooks = async (req, res) => {
+    
     const db_client = await pool.connect();
     const query = 'SELECT * FROM public."Books"';
 

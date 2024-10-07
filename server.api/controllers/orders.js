@@ -8,6 +8,7 @@ const storeOrders = async (req, res) => {
     }
 
     const client = await pool.connect(); 
+    const response = [];
     try {
         //start a transaction
         await client.query('BEGIN'); 
@@ -24,10 +25,11 @@ const storeOrders = async (req, res) => {
             ];
 
             await client.query(query, values);
+            response.push(order.orderId);
         });
         await client.query('COMMIT'); 
 
-        res.status(201).send({ message: 'Orders stored successfully' });
+        res.status(200).send({orderId: response, message: 'Order stored successfully'});
     } catch (error) {
 
         await client.query('ROLLBACK'); 
